@@ -3,7 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { Bell, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
@@ -43,7 +43,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <Bell className="h-12 w-12 text-blue-600" />
+            <img src="/RSS_Today_Logo.png" alt="RSS Today" className="h-12 w-12" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Sign in to RSS Today
