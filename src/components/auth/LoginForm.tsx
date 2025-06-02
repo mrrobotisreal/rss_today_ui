@@ -1,38 +1,53 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { loginSchema, type LoginFormData } from '../../lib/validation';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const { login } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
-    if (!email || !password) {
-      setError('Please fill in all fields');
-      return;
-    }
-
+  const onSubmit = async (data: LoginFormData) => {
     setLoading(true);
-    setError('');
 
     try {
-      await login(email, password);
+      await login(data.email, data.password);
+      // Show success toast
+      toast.success('Welcome back! Logged in successfully.');
+      // Navigation to Dashboard will happen automatically through the AuthContext
+      // when the user state changes in App.tsx
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'Login failed');
+      const errorMessage = error instanceof Error ? error.message : 'Login failed';
+      toast.error(errorMessage);
+      setError('root', {
+        type: 'manual',
+        message: errorMessage,
+      });
     } finally {
       setLoading(false);
     }
@@ -58,10 +73,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
             <CardTitle>Login</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {errors.root && (
                 <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
-                  {error}
+                  {errors.root.message}
                 </div>
               )}
 
@@ -72,12 +87,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                 <Input
                   id="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register('email')}
                   placeholder="Enter your email"
-                  required
                   className="w-full"
+                  disabled={loading}
                 />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                )}
               </div>
 
               <div>
@@ -88,16 +105,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                   <Input
                     id="password"
                     type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    {...register('password')}
                     placeholder="Enter your password"
-                    required
                     className="w-full pr-10"
+                    disabled={loading}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 disabled:opacity-50"
+                    disabled={loading}
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -106,6 +123,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                     )}
                   </button>
                 </div>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                )}
               </div>
 
               <Button
@@ -113,7 +133,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                 disabled={loading}
                 className="w-full"
               >
-                {loading ? 'Signing in...' : 'Sign in'}
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  'Sign in'
+                )}
               </Button>
             </form>
 
@@ -122,7 +149,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                 Don't have an account?{' '}
                 <button
                   onClick={onSwitchToRegister}
-                  className="font-medium text-blue-600 hover:text-blue-500"
+                  className="font-medium text-blue-600 hover:text-blue-500 disabled:opacity-50"
+                  disabled={loading}
                 >
                   Sign up
                 </button>

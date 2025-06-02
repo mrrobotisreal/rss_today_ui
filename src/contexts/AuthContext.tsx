@@ -120,8 +120,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(errorData.error || 'Registration failed');
       }
 
-      const data = await response.json();
-      setUserInfo(data.user);
+      // After successful registration, sign the user into Firebase
+      // This will trigger the auth state change and automatic navigation
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const idToken = await userCredential.user.getIdToken();
+
+      // Verify with backend and get user info
+      const verifyResponse = await fetch(`${API_BASE_URL}/auth/verify`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id_token: idToken }),
+      });
+
+      if (verifyResponse.ok) {
+        const verifyData = await verifyResponse.json();
+        setUserInfo(verifyData.user);
+      }
     } catch (error) {
       console.error('Registration error:', error);
       throw error;
