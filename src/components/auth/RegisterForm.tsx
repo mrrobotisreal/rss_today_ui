@@ -56,7 +56,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <img src="/RSS_Today_Logo.png" alt="RSS Today" className="h-12 w-12" />
+            <img src="/rss-today-logo.svg" alt="RSS Today" className="h-12 w-12" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Create your RSS Today account
