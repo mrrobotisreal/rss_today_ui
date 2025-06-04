@@ -109,6 +109,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                     placeholder="Enter your password"
                     className="w-full pr-10"
                     disabled={loading}
+                    autoComplete="current-password"
                   />
                   <button
                     type="button"
