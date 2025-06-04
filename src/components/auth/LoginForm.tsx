@@ -91,6 +91,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
                   placeholder="Enter your email"
                   className="w-full"
                   disabled={loading}
+                  autoComplete="email"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
