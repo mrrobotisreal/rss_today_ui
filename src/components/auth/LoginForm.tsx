@@ -58,7 +58,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSwitchToRegister }) => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <img src="/rss-today-logo-lg.svg" alt="RSS Today" className="h-36 w-36" />
+            <img src="/rss-today-logo-lg.webp" alt="RSS Today" className="h-36 w-36" />
           </div>
           <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
             Sign in to RSS Today

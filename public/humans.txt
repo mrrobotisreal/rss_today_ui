@@ -1,0 +1,52 @@
+/* TEAM */
+Developer: Mitchell Wintrow
+Contact: mitchellwintrow@gmail.com
+Location: Seattle, Washington, USA
+
+/* THANKS */
+Thanks to all the open source contributors and maintainers
+of the amazing libraries and frameworks used in this project.
+
+/* SITE */
+Last update: 2025-06-03
+Standards: HTML5, CSS3, ES2022, TypeScript
+Components: React, Firebase, Tailwind CSS
+Software: Visual Studio Code, Vite, Node.js
+
+/* TECHNOLOGIES */
+Frontend Framework: React 18.3.1
+Language: TypeScript 5.8.3
+Build Tool: Vite 6.3.5
+Styling: Tailwind CSS 4.1.8
+Authentication: Firebase 11.8.1
+UI Components: Radix UI, Shadcn/ui
+Icons: Lucide React 0.511.0
+Forms: React Hook Form 7.57.0, Zod 3.25.48
+State Management: React Context API
+Theme: Next Themes 0.4.6
+Notifications: Sonner 2.0.5
+Utilities: clsx, class-variance-authority, tailwind-merge
+Linting: ESLint 9.25.0
+Development: @vitejs/plugin-react, TypeScript ESLint
+
+/* HOSTING */
+Hosting: Vercel
+Domain: https://www.rss-today.com
+Canonical: https://www.rss-today.com (redirects from https://rss-today.com)
+
+/* PURPOSE */
+RSS Today is a modern web application for monitoring RSS feeds
+with real-time alerts and keyword-based notifications.
+Built with performance, accessibility, and SEO in mind.
+Optimized for Google AdSense integration and web crawlers.
+
+/* CONTACT ORGANIZATION */
+Organization: WinApps Solutions LLC
+Website: https://winapps.io
+Main Product: RSS Today - Your News, Your Way, Right Now
+
+          .-.
+         /   \
+        | @ @ |    Thank you for visiting!
+         \   /     We built this with ❤️
+          '-'      for the developer community.

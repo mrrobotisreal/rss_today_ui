@@ -176,7 +176,7 @@ export const Dashboard: React.FC = () => {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
               {/* <Bell className="h-8 w-8 text-blue-600" /> */}
-              <img src="/rss-today-logo-lg.svg" alt="RSS Today" className="h-12 w-12" />
+              <img src="/rss-today-logo-lg.webp" alt="RSS Today" className="h-12 w-12" />
               <h1 className="text-2xl font-bold text-gray-900">RSS Today</h1>
             </div>
 

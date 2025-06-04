@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Important files
+Sitemap: https://www.rss-today.com/sitemap.xml
+
+# Allow crawling of main assets
+Allow: /images/
+Allow: /RSS_Today_icon.webp
+Allow: /RSS_Today_Logo.webp
+Allow: /rss-today-logo-lg.webp
+Allow: /*.css
+Allow: /*.js
+
+# Disallow admin and private areas (if any exist in the future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.well-known/
+
+# Crawl delay (optional - be respectful to servers)
+Crawl-delay: 1
+
+# Block specific bots that might be problematic (optional)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
